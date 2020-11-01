@@ -11,13 +11,13 @@ if (! function_exists('toastr')) {
      *
      * @return Toastr
      */
-    function toastr(string $message = null, string $type = 'success', string $title = '', array $options = []): Toastr
+    function toastr(string $message = null, string $type = 'success', array $options = []): Toastr
     {
         if (is_null($message)) {
             return app('toastr');
         }
 
-        return app('toastr')->addNotification($type, $message, $title, $options);
+        return app('toastr')->addNotification($message, $type, $options);
     }
 }
 
@@ -29,9 +29,9 @@ if (! function_exists('toastInfo')) {
      *
      * @return Toastr
      */
-    function toastInfo(string $message = null, string $title = '', array $options = []): Toastr
+    function toastInfo(string $message = null, array $options = []): Toastr
     {
-        return app('toastr')->addNotification(Toastr::INFO, $message, $title, $options);
+        return app('toastr')->addNotification($message, Toastr::INFO, $options);
     }
 }
 
@@ -43,9 +43,9 @@ if (! function_exists('toastSuccess')) {
      *
      * @return Toastr
      */
-    function toastSuccess(string $message = null, string $title = '', array $options = []): Toastr
+    function toastSuccess(string $message = null, array $options = []): Toastr
     {
-        return app('toastr')->addNotification(Toastr::SUCCESS, $message, $title, $options);
+        return app('toastr')->addNotification($message, Toastr::SUCCESS, $options);
     }
 }
 
@@ -57,9 +57,9 @@ if (! function_exists('toastWarning')) {
      *
      * @return Toastr
      */
-    function toastWarning(string $message = null, string $title = '', array $options = []): Toastr
+    function toastWarning(string $message = null, array $options = []): Toastr
     {
-        return app('toastr')->addNotification(Toastr::WARNING, $message, $title, $options);
+        return app('toastr')->addNotification($message, Toastr::WARNING, $options);
     }
 }
 
@@ -71,9 +71,9 @@ if (! function_exists('toastError')) {
      *
      * @return Toastr
      */
-    function toastError(string $message = null, string $title = '', array $options = []): Toastr
+    function toastError(string $message = null, array $options = []): Toastr
     {
-        return app('toastr')->addNotification(Toastr::ERROR, $message, $title, $options);
+        return app('toastr')->addNotification($message, Toastr::ERROR, $options);
     }
 }
 
