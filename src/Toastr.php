@@ -75,9 +75,9 @@ class Toastr
      *
      * @return Toastr
      */
-    public function error(string $message, string $title = '', array $options = []): self
+    public function error(string $message, array $options = []): self
     {
-        return $this->addNotification(self::ERROR, $message, $title, $options);
+        return $this->addNotification($message, self::ERROR, $options);
     }
 
     /**
@@ -89,9 +89,9 @@ class Toastr
      *
      * @return Toastr
      */
-    public function info(string $message, string $title = '', array $options = []): self
+    public function info(string $message, array $options = []): self
     {
-        return $this->addNotification(self::INFO, $message, $title, $options);
+        return $this->addNotification($message, self::INFO, $options);
     }
 
     /**
@@ -103,9 +103,9 @@ class Toastr
      *
      * @return Toastr
      */
-    public function success(string $message, string $title = '', array $options = []): self
+    public function success(string $message, array $options = []): self
     {
-        return $this->addNotification(self::SUCCESS, $message, $title, $options);
+        return $this->addNotification($message, self::SUCCESS, $options);
     }
 
     /**
@@ -117,9 +117,9 @@ class Toastr
      *
      * @return Toastr
      */
-    public function warning(string $message, string $title = '', array $options = []): self
+    public function warning(string $message, array $options = []): self
     {
-        return $this->addNotification(self::WARNING, $message, $title, $options);
+        return $this->addNotification($message, self::WARNING, $options);
     }
 
     /**
@@ -132,11 +132,10 @@ class Toastr
      *
      * @return Toastr
      */
-    public function addNotification(string $type, string $message, string $title = '', array $options = []): self
+    public function addNotification(string $message, string $type, array $options = []): self
     {
         $this->notifications[] = [
             'type'    => in_array($type, $this->allowedTypes, true) ? $type : self::WARNING,
-            'title'   => $this->escapeSingleQuote($title),
             'message' => $this->escapeSingleQuote($message),
             'options' => json_encode($options),
         ];
@@ -187,7 +186,7 @@ class Toastr
     {
         return array_map(
             function ($n) {
-                return $this->toastr($n['type'], $n['message'], $n['title'], $n['options']);
+                return $this->toastr($n['message'], $n['type'], $n['options']);
             },
             $this->session->get(self::TOASTR_NOTIFICATIONS, [])
         );
@@ -203,9 +202,9 @@ class Toastr
      *
      * @return string
      */
-    public function toastr(string $type, string $message = '', string $title = '', string $options = ''): string
+    public function toastr(string $type, string $message = '', string $options = ''): string
     {
-        return "toastr.$type('$message', '$title', $options);";
+        return "NioApp.Toast('$message', '$type', $options);";
     }
 
     /**
